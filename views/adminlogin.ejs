@@ -1,8 +1,18 @@
-<!-- adminlogin.ejs -->
+<!DOCTYPE html>
+<html lang="en">
 
-<%- include('./partials/header') %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchara - Luxury Watches</title>
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-    <div class="min-h-screen flex flex-col bg-white">
+<body class="font-helvetica_now_display bg-cover bg-center">
+
+    <div class="min-h-screen flex flex-col bg-zinc-100">
         <% if (error && error.length> 0) { %>
             <div id="flash-message"
                 class="absolute top-20 left-1/2 transform -translate-x-1/2 p-4 rounded-md bg-red-500 text-white shadow-lg animate-bounce">
@@ -20,7 +30,7 @@
                         <div
                             class="container mx-auto px-2 sm:px-6 lg:px-3 grid sm:grid-cols-1 md:grid-cols-2  gap-5 place-items-center h-screen">
                             <!-- Left Panel: Login Form -->
-                            <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <div class="md:w-[30vw] bg-white p-8 rounded-lg shadow-lg">
                                 <h2 class="text-2xl font-bold mb-6 text-gray-800">Admin Login</h2>
                                 <form action="/owner/login" method="POST" class="mb-4">
                                     <div class="mb-4">
@@ -38,12 +48,12 @@
                                             required>
                                     </div>
                                     <button type="submit"
-                                        class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">Login</button>
+                                        class="w-[10vw] bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">Login</button>
                                 </form>
                             </div>
 
                             <!-- Right Panel: Registration Form -->
-                            <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <div class="md:w-[30vw] bg-white p-8 rounded-lg shadow-lg">
                                 <h2 class="text-2xl font-bold mb-6 text-gray-800">Register New Admin</h2>
                                 <form action="/owner/create" method="POST">
                                     <div class="mb-4">
@@ -70,7 +80,7 @@
                                             required>
                                     </div>
                                     <button type="submit"
-                                        class="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200">Register</button>
+                                        class="w-[12vw] bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200">Register</button>
                                 </form>
                             </div>
                         </div>

@@ -1,8 +1,20 @@
-<%- include('./partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watchara - Luxury Watches</title>
+  <link rel="stylesheet" href="/public/stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="font-helvetica_now_display bg-cover bg-center">
 
   <% if (success.length> 0) { %>
     <div id="flash-message"
-      class="absolute top-16 left-1/2 transform -translate-x-1/2 p-3 rounded-md bg-blue-500 shadow-lg animate-bounce">
+      class="z-50 inline-block absolute top-16 left-1/2 transform -translate-x-1/2 p-3 rounded-md bg-blue-500 shadow-lg animate-bounce">
       <span class="inline-block text-white font-semibold">
         <%= success %>
       </span>

@@ -1,17 +1,16 @@
 <%- include('./partials/header') %>
 
     <div class="min-h-screen flex flex-col bg-white">
-
         <% if (error && error.length> 0) { %>
             <div id="flash-message"
-                class="absolute top-20 left-1/2 transform -translate-x-1/2 p-4 rounded-md bg-red-500 text-white shadow-lg animate-bounce">
+                class="z-50 absolute top-20 left-1/2 transform -translate-x-1/2 p-4 rounded-md bg-red-500 text-white shadow-lg animate-bounce">
                 <%= error %>
             </div>
             <% } %>
 
                 <% if (success && success.length> 0) { %>
                     <div id="flash-message"
-                        class="absolute top-20 left-1/2 transform -translate-x-1/2 p-4 rounded-md bg-green-500 text-white shadow-lg animate-bounce">
+                        class=" z-50 absolute top-20 left-1/2 transform -translate-x-1/2 p-4 rounded-md bg-green-500 text-white shadow-lg animate-bounce">
                         <%= success %>
                     </div>
                     <% } %>
@@ -22,12 +21,14 @@
                                 class="w-full lg:w-1/4 flex flex-col items-start bg-white p-6 rounded-lg shadow-lg border border-gray-300">
                                 <div class="bg-white p-4 rounded-lg mb-6 w-full border-b border-gray-200">
                                     <h3 class="text-lg font-medium text-gray-800 mb-4">Sort by</h3>
-                                    <form action="/shop">
+                                    <form action="/shop" id="sortForm" method="GET">
                                         <select
                                             class="border px-2 py-1 rounded focus:ring-2 focus:ring-yellow-500 w-full"
-                                            name="sortby">
-                                            <option value="popular">Popular</option>
-                                            <option value="newest">Newest</option>
+                                            name="sortby" id="sortby" onchange="this.form.submit()">
+                                            <option value="lowToHigh" <% if (sortby==='lowToHigh' ) { %> selected <% }
+                                                    %>>Low to High</option>
+                                            <option value="highToLow" <% if (sortby==='highToLow' ) { %> selected <% }
+                                                    %>>High to Low</option>
                                         </select>
                                     </form>
                                 </div>
@@ -35,23 +36,25 @@
                                     <h3 class="text-lg font-medium text-gray-800 mb-4">Categories</h3>
                                     <div class="flex flex-col space-y-4">
                                         <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">New Collection</a>
+                                            href="#">Analog Watch</a>
                                         <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">All Products</a>
+                                            href="#">Digital Watch</a>
                                         <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">Discounted Products</a>
+                                            href="#">Luxuary Watch</a>
                                     </div>
                                 </div>
                                 <div class="bg-white p-4 rounded-lg w-full border-b border-gray-200">
                                     <h3 class="text-lg font-medium text-gray-800 mb-4">Filter by</h3>
                                     <div class="flex flex-col space-y-4">
                                         <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">Availability</a>
+                                            href="/shop?availability=true">Availability</a>
                                         <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">Discount</a>
+                                            href="/shop?discount=true">Discount</a>
                                     </div>
                                 </div>
+
                             </div>
+
                             <div
                                 class="w-full lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
                                 <% products.forEach(function(product){ %>
@@ -70,8 +73,19 @@
                                                     <h3 class="text-lg font-semibold">
                                                         <%= product.name %>
                                                     </h3>
-                                                    <h4 class="text-md font-medium">₹ <%= product.price %>
-                                                    </h4>
+                                                    <% if (product.discount> 0) { %>
+                                                        <p class="text-md font-medium text-gray-500 line-through">₹ <%=
+                                                                product.price %>
+                                                        </p>
+                                                        <p class="text-md font-semibold text-yellow-500">₹ <%=
+                                                                product.price - (product.price * (product.discount /
+                                                                100)) %>
+                                                        </p>
+                                                        <% } else { %>
+                                                            <p class="text-md font-medium text-gray-900">₹ <%=
+                                                                    product.price %>
+                                                            </p>
+                                                            <% } %>
                                                 </div>
                                                 <a class="w-8 h-8 flex items-center justify-center rounded-full bg-yellow-500 text-white hover:bg-yellow-600 transition"
                                                     href="/addtocart/<%= product._id %>">

@@ -1,4 +1,3 @@
-// index.js
 const express = require('express');
 const router = express.Router();
 const userModel = require('../models/user-model');
@@ -8,24 +7,49 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 router.get('/', function(req, res, next) {
   let error = req.flash("error");
   let success = req.flash("success");
-  // let loggedIn = !!req.cookies.token;
   let loggedIn = false;
   const user = req.user;
   res.render("index", { loggedIn, error, success, user });
-  console.log(loggedIn);
 });
 
 router.get('/shop', isLoggedIn, async function(req, res) {
   try {
-    let products = await productModel.find();
-    let error = req.flash("error"); // Add error flash message
-    let success = req.flash("success"); // Add success flash message
-    res.render('shop', { products, error, success }); // Pass error and success messages to shop template
+      let sortby = req.query.sortby || 'lowToHigh';
+      let filter = req.query.filter;
+
+      let products = [];
+
+      if (filter === 'availability') {
+          products = await productModel.find().sort({ createdAt: -1 }).limit(4);
+      } else if (filter === 'discount') {
+          products = await productModel.find({ discount: { $gt: 0 } });
+      } else {
+          products = await productModel.find();
+      }
+
+      products.forEach(product => {
+          if (product.discount > 0) {
+              product.discountedPrice = product.price - (product.price * (product.discount / 100));
+          } else {
+              product.discountedPrice = product.price;
+          }
+      });
+
+      if (sortby === 'lowToHigh') {
+          products.sort((a, b) => a.discountedPrice - b.discountedPrice);
+      } else if (sortby === 'highToLow') {
+          products.sort((a, b) => b.discountedPrice - a.discountedPrice);
+      }
+
+      let error = req.flash("error");
+      let success = req.flash("success");
+      res.render('shop', { products, error, success, sortby });
   } catch (err) {
-    req.flash("error", err.message);
-    res.redirect('/');
+      req.flash("error", err.message);
+      res.redirect('/');
   }
 });
+
 
 router.get('/addtocart/:productid', isLoggedIn, async function(req, res){
   try {
@@ -45,7 +69,7 @@ router.get('/addtocart/:productid', isLoggedIn, async function(req, res){
 
 router.get('/cart', isLoggedIn, async function(req, res){
   let user = await userModel.findOne({email: req.user.email}).populate('cart');
-    res.render('cart', { user });
+  res.render('cart', { user });
 });
 
 module.exports = router;

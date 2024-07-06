@@ -3,12 +3,12 @@
 var express = require('express');
 var router = express.Router();
 const adminController = require('../controllers/adminController');
-const flash = require('connect-flash'); // Import connect-flash for flash messages
+const flash = require('connect-flash'); 
 
 // Route to display admin login page
 router.get('/', function(req, res, next) {
-  let error = req.flash('error'); // Retrieve error message from flash
-  let success = req.flash('success'); // Retrieve success message from flash
+  let error = req.flash('error'); 
+  let success = req.flash('success'); 
   res.render('adminlogin', { title: 'Admin Login', error, success });
 });
 
