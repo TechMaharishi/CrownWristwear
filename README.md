@@ -1,5 +1,3 @@
-Certainly! Here's the complete `README.md` content in Markdown format:
-
 ```markdown
 # CrownWristwear Shopping Website
 
