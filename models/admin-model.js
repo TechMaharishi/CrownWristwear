@@ -1,38 +1,33 @@
 const mongoose = require('mongoose');
 
-// Define the Admin schema
 const adminSchema = new mongoose.Schema({
   fullName: {
-    type: String, // Data type is String
-    required: true, // Full Name is required
-    minlength: 3, // Minimum length should be 3 characters
-    maxlength: 32, // Maximum length should be 32 characters
-    trim: true, // Remove white spaces from both ends
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 32,
+    trim: true,
   },
   email: {
-    type: String, // Data type is String
-    required: true, // Email is required
-    trim: true, // Remove white spaces from both ends
-    unique: true, // Email must be unique
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
   },
   password: {
-    type: String, // Data type is String
-    required: true, // Password is required
-    trim: true, // Remove white spaces from both ends
+    type: String,
+    required: true,
+    trim: true,
   },
   product: {
-    type: Array, // Data type is Array
-    default: [], // Default value is an empty array
+    type: Array,
+    default: [],
   },
-  picture: {
-    type: String, // Data type is String
-    trim: true, // Remove white spaces from both ends
-  },
+  image: Buffer,
   gstin: {
-    type: String, // Data type is String to accommodate alphanumeric GSTIN
-    trim: true, // Remove white spaces from both ends
+    type: String,
+    trim: true,
   },
 });
 
-// Export the Admin model based on the adminSchema
 module.exports = mongoose.model('Admin', adminSchema);

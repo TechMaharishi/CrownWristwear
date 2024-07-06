@@ -5,27 +5,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watchara - Luxury Watches</title>
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .close-menu,
+        .open-menu {
+            position: absolute;
+            cursor: pointer;
+            display: none;
+        }
+
+        .open-menu {
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+
+        .close-menu {
+            top: 20px;
+            right: 20px;
+        }
+
+        #check {
+            display: none;
+        }
+
+        @media (max-width: 800px) {
+            .menu {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 73%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                z-index: 100;
+                background-color: #000;
+                color: #fff;
+                transition: all 0.5s ease-in-out;
+                text-transform: uppercase;
+                font-size: 24px;
+            }
+
+            .menu li {
+                margin-top: 40px;
+            }
+
+            .menu li a {
+                padding: 10px;
+            }
+
+            .close-menu,
+            .open-menu {
+                display: block;
+            }
+
+            #check:checked~.menu {
+                right: 0;
+            }
+        }
+    </style>
+
 </head>
 
-<body class="font-['helvetica_now_display']"
-    style="background-image: url('https://images.unsplash.com/photo-1594534475808-b18fc33b045e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-    <nav class="w-full sticky top-0 left-0 px-5 py-3 bg-white shadow-md z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <h3 class="text-3xl font-bold text-yellow-500">Watchara</h3>
-                <button class="text-gray-600 focus:outline-none lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-                <div class="hidden lg:flex lg:items-center lg:w-auto">
-                    <!-- You can add additional navigation links here -->
-                </div>
-            </div>
-        </div>
-    </nav>
-</body>
+<body class="font-helvetica_now_display bg-cover bg-center">
+    <header>
+        <nav class="bg-white sticky w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+            <ul class="navigation max-w-[90vw] flex flex-wrap justify-between items-center relative mx-auto py-8">
+                <a class="logo" href="#">
+                    <h3 class="font-bold text-yellow-500 text-2xl">Crown Wrist Wear</h3>
+                </a>
+                <input type="checkbox" id="check" />
+
+                <span
+                    class="menu flex [&>li]:pl-8 [&>li>a]:text-center [&>li>a]:relative [&>li>a]:transition [&>li>a]:duration-200 [&>li>a]:ease-in-out [&>li>a]:font-medium [&>li>a]:text-lg">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/cart">Cart</a></li>
+                    <li class="text-red-500"><a href="/logout">Logout</a></li>
+                    <label for="check" class="close-menu">X</label>
+                </span>
+
+                <label for="check" class="open-menu">Menu</label>
+            </ul>
+        </nav>
+    </header>
