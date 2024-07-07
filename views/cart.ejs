@@ -1,7 +1,7 @@
 <%- include('./partials/header') %>
 
     <div class="min-h-screen flex flex-col bg-gradient-to-r from-yellow-50 to-gray-100 py-12">
-        <!-- Success Message -->
+        <!-- Success and Error Messages -->
         <% if (typeof success !=='undefined' ) { %>
             <div id="flash-message"
                 class="absolute top-5 left-1/2 transform -translate-x-1/2 p-3 rounded-md bg-blue-500">
@@ -11,7 +11,6 @@
             </div>
             <% } %>
 
-                <!-- Failure Message -->
                 <% if (typeof error !=='undefined' ) { %>
                     <div id="flash-message"
                         class="absolute top-5 left-1/2 transform -translate-x-1/2 p-3 rounded-md bg-red-500">
@@ -49,6 +48,12 @@
                                                         class="w-7 h-7 bg-white flex rounded-full items-center justify-center hover:bg-yellow-500 transition">
                                                         <i class="ri-subtract-line"></i>
                                                     </a>
+                                                    <form action="/removefromcart/<%= product._id %>" method="POST">
+                                                        <button type="submit"
+                                                            class="ml-2 text-red-500 hover:text-red-700">
+                                                            Remove
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="flex items-center justify-between px-5 py-2">
@@ -57,8 +62,8 @@
                                                 </h2>
                                             </div>
                                             <% if (product.discount) { %>
-                                                <div class="flex items-center justify-between px-5 py-2 text-red-500">
-                                                    <h4 class="text-md">Discounted Amount</h4>
+                                                <div class="flex items-center justify-between px-5 py-2 text-green-500">
+                                                    <h4 class="text-md">Amount After Discount</h4>
                                                     <h2 class="text-md font-semibold">₹ <%= product.price -
                                                             (product.price * (product.discount / 100)) %>
                                                     </h2>

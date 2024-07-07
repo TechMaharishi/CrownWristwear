@@ -30,6 +30,12 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  category: {
+    type: String,
+    required: true,
+    enum: ['Analog Watch', 'Digital Watch', 'Luxury Watch', 'N/A'],
+    default: 'N/A',
+  },
 });
 
-module.exports = mongoose.model('Products', productSchema);
+module.exports = mongoose.model('Product', productSchema);

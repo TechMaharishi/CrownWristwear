@@ -20,12 +20,33 @@ const userSchema = new mongoose.Schema({
   },
   cart: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Products"
+    ref: "Product"
   }],
-  order: {
-    type: Array,
-    default: [],
-  },
+  orders: [{
+    products: [{
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product"
+      },
+      quantity: {
+        type: Number,
+        default: 1
+      }
+    }],
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ['Pending', 'Completed', 'Cancelled'],
+      default: 'Pending',
+    },
+    orderDate: {
+      type: Date,
+      default: Date.now,
+    }
+  }],
   contact: {
     type: String,
     trim: true,

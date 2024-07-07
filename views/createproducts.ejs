@@ -11,7 +11,6 @@
 </head>
 
 <body class="font-helvetica_now_display bg-cover bg-center">
-
     <% if (success.length> 0) { %>
         <div id="flash-message"
             class="absolute top-16 left-1/2 transform -translate-x-1/2 p-3 rounded-md bg-blue-500 shadow-lg animate-bounce">
@@ -20,18 +19,15 @@
             </span>
         </div>
         <% } %>
-
             <div class="min-h-screen flex flex-col bg-gradient-to-r from-yellow-50 to-gray-100">
                 <div
                     class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-grow flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6">
                     <div class="w-full lg:w-1/4 flex flex-col items-start bg-white p-6 rounded-lg shadow-lg">
                         <div class="flex flex-col space-y-4 w-full">
                             <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                href="/owner/admin/allproducts">All
-                                Products</a>
+                                href="/owner/admin/allproducts">All Products</a>
                             <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                href="/owner/admin">Create
-                                new product</a>
+                                href="/owner/admin">Create new product</a>
                             <a class="block text-red-500 font-medium hover:text-red-600 transition"
                                 href="/owner/logout">Logout</a>
                         </div>
@@ -57,6 +53,18 @@
                                         class="border p-3 rounded-md w-full bg-gray-100 focus:ring-2 focus:ring-yellow-500">
                                 </div>
                             </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block mb-2 font-medium text-gray-700">Category</label>
+                                    <select name="category"
+                                        class="border p-3 rounded-md w-full bg-gray-100 focus:ring-2 focus:ring-yellow-500">
+                                        <option value="Analog Watch">Analog Watch</option>
+                                        <option value="Digital Watch">Digital Watch</option>
+                                        <option value="Luxury Watch">Luxury Watch</option>
+                                        <option value="N/A" selected>N/A</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div>
                                 <h3 class="text-lg sm:text-xl font-semibold mb-4 text-gray-800">Panel Details</h3>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -75,5 +83,4 @@
                     </main>
                 </div>
             </div>
-
             <%- include('./partials/footer') %>

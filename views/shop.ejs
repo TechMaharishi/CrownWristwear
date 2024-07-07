@@ -26,33 +26,52 @@
                                             class="border px-2 py-1 rounded focus:ring-2 focus:ring-yellow-500 w-full"
                                             name="sortby" id="sortby" onchange="this.form.submit()">
                                             <option value="lowToHigh" <% if (sortby==='lowToHigh' ) { %> selected <% }
-                                                    %>>Low to High</option>
+                                                    %>>Low to High
+                                            </option>
                                             <option value="highToLow" <% if (sortby==='highToLow' ) { %> selected <% }
-                                                    %>>High to Low</option>
+                                                    %>>High to Low
+                                            </option>
                                         </select>
                                     </form>
                                 </div>
                                 <div class="bg-white p-4 rounded-lg mb-6 w-full border-b border-gray-200">
                                     <h3 class="text-lg font-medium text-gray-800 mb-4">Categories</h3>
-                                    <div class="flex flex-col space-y-4">
-                                        <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">Analog Watch</a>
-                                        <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">Digital Watch</a>
-                                        <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="#">Luxuary Watch</a>
-                                    </div>
+                                    <form action="/shop" method="GET">
+                                        <div class="flex flex-col space-y-4">
+                                            <label class="block">
+                                                <input type="radio" name="category" value="None" <% if (!category ||
+                                                    category==='None' ) { %> checked <% } %>
+                                                    onchange="this.form.submit()">
+                                                    <span
+                                                        class="text-yellow-500 font-medium hover:text-yellow-600 transition">None</span>
+                                            </label>
+                                            <label class="block">
+                                                <input type="radio" name="category" value="Analog Watch" <% if
+                                                    (category==='Analog Watch' ) { %> checked <% } %>
+                                                    onchange="this.form.submit()">
+                                                    <span
+                                                        class="text-yellow-500 font-medium hover:text-yellow-600 transition">Analog
+                                                        Watch</span>
+                                            </label>
+                                            <label class="block">
+                                                <input type="radio" name="category" value="Digital Watch" <% if
+                                                    (category==='Digital Watch' ) { %> checked <% } %>
+                                                    onchange="this.form.submit()">
+                                                    <span
+                                                        class="text-yellow-500 font-medium hover:text-yellow-600 transition">Digital
+                                                        Watch</span>
+                                            </label>
+                                            <label class="block">
+                                                <input type="radio" name="category" value="Luxuary Watch" <% if
+                                                    (category==='Luxuary Watch' ) { %> checked <% } %>
+                                                    onchange="this.form.submit()">
+                                                    <span
+                                                        class="text-yellow-500 font-medium hover:text-yellow-600 transition">Luxuary
+                                                        Watch</span>
+                                            </label>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="bg-white p-4 rounded-lg w-full border-b border-gray-200">
-                                    <h3 class="text-lg font-medium text-gray-800 mb-4">Filter by</h3>
-                                    <div class="flex flex-col space-y-4">
-                                        <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="/shop?availability=true">Availability</a>
-                                        <a class="block text-yellow-500 font-medium hover:text-yellow-600 transition"
-                                            href="/shop?discount=true">Discount</a>
-                                    </div>
-                                </div>
-
                             </div>
 
                             <div

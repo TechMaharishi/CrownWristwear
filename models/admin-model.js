@@ -19,10 +19,39 @@ const adminSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  product: {
-    type: Array,
-    default: [],
-  },
+  products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product"
+  }],
+  orders: [{
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    products: [{
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product"
+      },
+      quantity: {
+        type: Number,
+        default: 1
+      }
+    }],
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ['Pending', 'Completed', 'Cancelled'],
+      default: 'Pending',
+    },
+    orderDate: {
+      type: Date,
+      default: Date.now,
+    }
+  }],
   image: Buffer,
   gstin: {
     type: String,
